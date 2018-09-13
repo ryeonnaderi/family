@@ -1,27 +1,32 @@
 import React from "react";
 
-
-const LoginForm = (props) => (
+const loginForm = (props) =>(
     <div>
-        <h1>login</h1>
+        <h1> login </h1>
         <form>
 
             <div>
-                <input type = "email" placeholder=" email" name ="email" onChange = {props.inputChange} value={props.email}/>
+                <input type =" text" name ="name" placeholder = "name" onChange = {props.inputChange} value ={props.name} />
             </div>
 
             <div>
-                <input type = "password" name = "password" placeholder = "password" onChange={props.inputChange} value={props.password}/>
-            </dv>
-            
-            <p>
-                <button type = "submit" onClick = {props.submitForm}> login</button>
-            </p>
+                <input type =" text" name ="email" placeholder = "email" onChange = {props.inputChange} value ={props.email} />
+            </div>
+
+            <div>
+                <input type =" text" name ="password" placeholder = "password" onChange = {props.inputChange} value ={props.password} />
+            </div>
+
+            <div>
+                <button onClick = {props.loginForm}>login</button>
+            </div>
 
         </form>
-
+        
     </div>
+);
 
-)
 
-export default LoginForm;
+
+export default loginForm;
+

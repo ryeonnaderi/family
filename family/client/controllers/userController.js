@@ -1,6 +1,6 @@
 const db = require("../models");
-
 const bcrypt = require("bcrypt");
+
 module.exports = {
     create: (res,req) =>{
         const {email,password} = req.body;
@@ -34,6 +34,13 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
 
+    },
+    update:(req,res) =>{
+        db.Book
+        .findById({_id: req.params.id})
+        .then(bdModel =>dbModel.remove())
+        .then(bdModel =>res.json(dbModel))
+        .catch(err => res.status(422).json(err));
     }
-    // have to update and remove 
+    
 };
