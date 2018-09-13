@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
 import authentication from "./component/authentication";
+import API from "./utils/API";
+import logInForm from "..components/logInForm"
 
 class Login extends Component{
     state = {
-        name: "",
         email: "",
         password: ""
     }
@@ -16,7 +17,7 @@ class Login extends Component{
     }
 
     submitForm = event =>{
-        API.getUser(this.state.name).then(res =>console.log(res.data));
+        API.getUser(this.state.email).then(res =>console.log(res.data));
     }
 
     render(){
@@ -24,7 +25,6 @@ class Login extends Component{
            <logInForm
            inputChange = {this.inputChange}
            submitForm = {this.submitForm}
-           name = {this.name}
            email = {this.email}
            password = {this.password}
            />

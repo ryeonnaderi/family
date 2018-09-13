@@ -3,14 +3,28 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom
 import welcome  from "./pages/welcome";
 import login from "./pages/login";
 import signUp from "./pages/signup";
+import authenticate from "../Component/authenticate"
+const PrivateRoute = ({Component: Component, ...rest}) =>(
+  <Route {... rest} render = {(props)=>(
+    authenticate.isAuthenticated ===true
+    ?<Component {...props}/>
+    :<Redirect to="/login"/>
+  )}/>
+)
 
-export default() => (
+const app = () => (
   <Router>
     <div>
-      <Route exact path= "/" Component = {welcome}/>
-      <Route exact path="/login" Component = {login}/>
-      <Route exact path="/signup" Component = {signUp}/>
+      <Switch>
+        <Route exact path= "/" Component = {welcome}/>
+        <Route exact path="/login" Component = {login}/>
+        <Route exact path="/signup" Component = {signUp}/>
+        {/* path once signed in */}
+        
+      </Switch>
+
       </div>
   </Router>
 )
 
+export default app;
