@@ -19,6 +19,7 @@ const loginForm = (props) =>(
 
             <div>
                 <button onClick = {props.loginForm}>login</button>
+                <button onClick = {props.forgotPassword}>forgot Password</button>
             </div>
 
         </form>

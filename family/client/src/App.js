@@ -4,6 +4,7 @@ import welcome  from "./pages/welcome";
 import login from "./pages/login";
 import signUp from "./pages/signup";
 import authenticate from "../Component/authenticate"
+import forgotPassword from "./pages/forgotPassword";
 const PrivateRoute = ({Component: Component, ...rest}) =>(
   <Route {... rest} render = {(props)=>(
     authenticate.isAuthenticated ===true
@@ -19,6 +20,7 @@ const app = () => (
         <Route exact path= "/" Component = {welcome}/>
         <Route exact path="/login" Component = {login}/>
         <Route exact path="/signup" Component = {signUp}/>
+        <Route ecact path="/forgotPassword" component = {forgotPassword}/>
         {/* path once signed in */}
         
       </Switch>

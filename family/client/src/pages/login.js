@@ -4,16 +4,24 @@ import authentication from "./component/authentication";
 import API from "./utils/API";
 import logInForm from "..components/logInForm"
 
+
 class Login extends Component{
     state = {
         email: "",
-        password: ""
+        password: "",
+        forgotPassword: false
     }
     inputChange = event =>{
         const {name,value} = event.target;
         
         this.setState({
-            [name]: value})
+            [name]: value
+        })
+    }
+    forgotPassword = event =>{
+        this.setState({
+            forgotPassword:true
+        })
     }
 
     submitForm = event =>{
@@ -21,6 +29,9 @@ class Login extends Component{
     }
 
     render(){
+        if(this.state.forgotPassword === true){
+            return <Redirect to="/forgotPassword"/>
+        }
        return(
            <logInForm
            inputChange = {this.inputChange}
@@ -32,9 +43,5 @@ class Login extends Component{
     }
 
 }
-
-
-
-
 
 export default login;
