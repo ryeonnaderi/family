@@ -1,16 +1,16 @@
 import React from "react";
-import{Router, Redirect} from "react-router-dom";
+import{Route, Redirect} from "react-router-dom";
 
-
-const Authentication = {
-    isAuthenticatied: false,
-    Authenticate(cb){
-        this.isAuthenticatied = true
-        setTimeout(cb,100)
+const fakeAuth = {
+    isAuthenticated: false,
+    authenticate(cb){
+      this.isAuthenticated = true
+      setTimeout(cb, 100)
+    },
+    signout(cb){
+      this.isAuthenticated = false
+      setTimeout(cb, 100)
     }
-}
+  }
 
-
-
-
-export default Authentication;
+export default fakeAuth;

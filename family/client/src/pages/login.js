@@ -1,47 +1,63 @@
-import React, {Component} from "react";
-import {Redirect} from "react-router-dom";
-import authentication from "./component/authentication";
-import API from "./utils/API";
-import logInForm from "..components/logInForm"
+import React,{Component} from "react";
+import LogInForm from "../components/LogInForm";
+import API from "../utils/API";
+import { Redirect} from "react-router-dom";
+import fakeAuth from "../components/Authentication";
 
-
-class Login extends Component{
+class  LogIn extends Component{
     state = {
+        toSignup: false,
         email: "",
-        password: "",
-        forgotPassword: false
-    }
-    inputChange = event =>{
-        const {name,value} = event.target;
+        password: ""
         
+    };
+    
+    goToSignup = event =>{
         this.setState({
-            [name]: value
-        })
-    }
-    forgotPassword = event =>{
-        this.setState({
-            forgotPassword:true
+            toSignup: true
         })
     }
 
-    submitForm = event =>{
-        API.getUser(this.state.email).then(res =>console.log(res.data));
+    goToDashboard = event =>{
+        fakeAuth.authenticate(() => {
+            this.setState({
+                toDashboard: true
+            })
+        })
     }
+   
+   inputChange = event =>{
+       const {name, value} = event.target;
+
+       this.setState({
+           [name]: value});
+   }
+
+   submitForm = event =>{
+       event.preventDefault();
+       API.getUser(this.state.email).then(res => console.log(res.data));
+       this.goToDashboard()
+   }
 
     render(){
-        if(this.state.forgotPassword === true){
-            return <Redirect to="/forgotPassword"/>
+        const {email} = this.state;
+        if(this.state.toSignup === true){
+            return <Redirect to="/signup"/>
         }
-       return(
-           <logInForm
-           inputChange = {this.inputChange}
-           submitForm = {this.submitForm}
-           email = {this.email}
-           password = {this.password}
-           />
-       )
+        
+        return(
+            <LogInForm         
+                inputChange={this.inputChange}
+                submitForm={this.submitForm}
+                goToSignup={this.goToSignup}
+                email={this.state.email}
+                password={this.state.password}
+            />  
+        )
     }
+    
 
+    
 }
 
-export default login;
+export default LogIn;

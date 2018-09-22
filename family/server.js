@@ -4,31 +4,37 @@ const express = require("express");
 const app = express();
 
 const logger = require("morgan");
-const PORT = process.env.PORT || 3000;
-const routes = require("./Routes")
+const PORT = process.env.PORT || 3001;
+const routes = require("./routes");
 const mongoose = require("mongoose");
 
-app.use(bodyParser.urlencoded({extended:true}));
+// Define middleware here
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 
-if( process.env.NODE_ENV === "production"){
-    app.use (express.static("client/build"));
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
 }
 
-mongoose.connect(process.env.MONGODB_URI)
+//db defined here:
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Users")
 
+// Define API routes here
 app.use(routes)
 
-app.post("/submit", (req,res) =>{
-    User.create(req.body)
-    .then((dbUser) =>{
-        res.json(dbUser)
-    }).catch((err) =>{
-        res.json(err)
-    });
+
+app.post("/submit", function(req, res) {
+  User.create(req.body)
+  .then(function(dbUser) {
+    res.json(dbUser);
+  })
+  .catch(function(err) {
+    res.json(err);
+  });
 });
 
-app.listen(PORT ,()=>{
-    console.log("server is running on port" + PORT)
+app.listen(PORT, () => {
+  console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

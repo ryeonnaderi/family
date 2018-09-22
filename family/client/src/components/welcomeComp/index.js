@@ -1,1 +1,1 @@
-export {default} from "./welcomeComp";
+export { default } from "./WelcomeComp";

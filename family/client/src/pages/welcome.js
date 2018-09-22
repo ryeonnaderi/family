@@ -1,37 +1,41 @@
 import React,{Component} from "react";
+import WelcomeComp from "../components/WelcomeComp";
 import {Redirect} from "react-router-dom";
 
+class Welcome extends Component{
 
-class welcome extends Component{
-    state ={
+    state = {
         toLogin: false,
         toSignup: false
     }
-    gotoLogin = event =>{
+
+    goToLogin = event =>{
         this.setState({
-            toLogin:true
+            toLogin: true
         })
     }
-    gotoSignup = event =>(
+
+    goToSignup = event =>{
         this.setState({
-            toSignup:true
+            toSignup: true
         })
-    )
+    }
+
     render(){
         if(this.state.toLogin === true){
             return <Redirect to="/login"/>
         }
-
         if(this.state.toSignup === true){
             return <Redirect to="/signup"/>
         }
         return(
-            <welcomeComp
-           gotoLogin={this.gotoLogin}
-           gotoSignup={this.gotoSignup}
-           />
+            <WelcomeComp
+                goToLogin={this.goToLogin}
+                goToSignup={this.goToSignup}
+            />
         )
-
     }
+
 }
+
 export default Welcome;
