@@ -2,6 +2,7 @@ import React from "react";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
+import member from "./pages/member";
 import{BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import "./App.css";
 import fakeAuth from "./components/Authentication"
@@ -22,6 +23,8 @@ const App =() =>(
       <Route exact path = "/" component={Welcome}/>
       <Route exact path = "/login" component={Login}/>
       <Route exact path = "/signup" component={SignUp}/>
+
+      <PrivateRoute exact path = "/:email/member" component={member}/>
       
       
       </Switch>
